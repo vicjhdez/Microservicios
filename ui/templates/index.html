@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shoe Store</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+    <script src="/static/js/script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('shoe-button').addEventListener('click', function() {
+                fetch('http://192.168.49.2:30081/api/shoes')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('content').textContent = JSON.stringify(data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        document.getElementById('content').textContent = 'An error occurred.';
+                    });
+            });
+
+            document.getElementById('offers-button').addEventListener('click', function() {
+                fetch('http://192.168.49.2:30081/api/offers')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('content').textContent = JSON.stringify(data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        document.getElementById('content').textContent = 'An error occurred.';
+                    });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Welcome to Shoe Store!</h1>
+    <button id="shoe-button">Show Shoes</button>
+    <button id="offers-button">Show Offers</button>
+    <div id="content"></div>
+</body>
+</html>
